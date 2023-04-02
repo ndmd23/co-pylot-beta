@@ -1,91 +1,46 @@
+# VSCODE Extension for Integration of OpenAI Models and APIs
 
-VSCODE Extension for Integration of OpenAI Models and APIs
+co-pylot is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
 
-Creates key-shortcut in VSCODE to connect to STREAM of
-    - OpenAI        GPT-3.5-Turbo API       API-Key required
-                    text-davinci-3
-    - GPT4All       for Offline Use.        download of 4GB model required
+## Modes
 
-Modes  
-    - Script        model responds in your script
-    - Editor        opens Webview Editor to respond
-                    Search bar: text to GPT-3.5 API
+- Script: Model responds in your script
+- Editor: Opens Webview Editor to respond. Search bar: text to GPT-3.5 API
 
-Key-shortcuts
-    General
-        ctrl+alt+m      Changes between Modes
-        ctrl+alt+a      stops writing, "ends" API
-    GPT-3.5-Turbo
-        ctrl+alt+g      selected text and history to GPT-3.5 API
-        ctrl+alt+s      sets System prompt
-        ctrl+alt+v      shows history in Information Window
-        ctrl+alt+d      deletes history
-    GPT4ALL
-        ctrl+alt+o      offline selected text to gpt4all
+## Key-shortcuts
 
+### General
 
-To get this extension running follow these steps:
+- `ctrl+alt+m`: Changes between Modes
+- `ctrl+alt+a`: Stops writing, "ends" API
 
-Download Repository
-    Into co-pylot folder
+### GPT-3.5-Turbo
 
-API-KEY
+- `ctrl+alt+g`: Selected text and history to GPT-3.5 API
+- `ctrlalt+s`: Sets System prompt
+- `ctrl+alt+v`: Shows history in Information Window
+- `ctrl+alt+d`: Deletes history
 
-    Change API-Key in co-pylot/.env document
-    OPEN_API_KEY = your_open_ai_key
+### GPT4ALL
 
-    If you don't have one, create one here:
-        https://platform.openai.com/account/api-keys
+- `ctrl+alt+o`: Offline selected text to GPT4All
 
-Offline Use
+## Installation
 
-    Currently uses gpt-lora-quantized.bin and gpt-lora-quantized-win64.exe
-    It calls .exe with a python subprocess. This slows it down somewhat. 
-    If a better solution is released, write me up. Ill try to implement it
+To get this extension running, follow these steps:
 
-    To get this started go here to download the model (4 GB)
-    
-    - Download from Github Nomic gpt4all in different folder
-        https://github.com/nomic-ai/gpt4all
-    
-    - Copy chat folder gpt-lora-quantized.bin and gpt-lora-quantized-win64.exe in the empty ~/GPT4All folder 
- 
-Create .vsix file
-
-    - install package clients for vscode extention
-        npm install -g yo generator-code
-        npm install -g @vscode/vsce
-    - open co-pylot folder in vscode    
-        vsce package
-
-
-Install Extension in VSCode
-
-    Run vscix file from co-pylot folder in your node.js terminal:
-
-        code --install-extension C:/Users/path/to/your-extension/your-extension-0.0.1.vsix
-
-Check if it has been installed
-
-- go to Extensions (ctrl+shift+x)
-- type '@installed co-pylot' in search bar
-
-You should find co-pylot by undefined_publisher.
-
-Check functionality
-
-General
-    - Press ctrl+alt+m: split screen named AI Webview Editor should appear
-    OR
-    - Press ctrl+shift+p
-    - search >'HelloWorld'
-    - Information Panel shows instantly
-ChatGPT
-    - Select Text
-    - Press ctrl+alt+g
-        Response should be Instant
-GPT4All
-    - Select Text
-    - Press ctrl+alt+o
-        Response appears within ca 30 seconds, be patient
-    
+1. Download the repository into the co-pylot folder.
+2. Change the API-Key in the co-pylot/.env document. `OPEN_API_KEY = your_open_ai_key`. If you don't have one, create one [here](https://platform.openai.com/account/api-keys).
+3. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy the chat folder `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in the empty `~/GPT4All` folder.
+4. Install the package clients for vscode extension:
+   - `npm install -g yo generator-code`
+   - ` install -g @vscode/vsce`
+5. Open the co-pylot folder in vscode and run `vsce package`.
+6. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder in your node.js terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
+7. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
+8. Check functionality:
+   - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
+   - OR
+   - Press `ctrl+shift+p`, search for `HelloWorld`, and the Information Panel should show instantly.
+ - ChatGPT: Select text and press `ctrl+alt+g`. The response should be instant.
+   - GPT4All: Select text and press `ctrl+alt+o`. The response appears within approximately 30 seconds.
