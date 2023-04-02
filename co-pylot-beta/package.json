@@ -1,0 +1,110 @@
+{
+  "name": "co-pylot-beta",
+  "displayName": "co-pylot-beta",
+  "description": "VSCode AI Assistant",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "co-pylot-beta.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "co-pylot.retrieveInput",
+        "title": "Retrieve Saved Input"
+      },
+      {
+        "command": "co-pylot.SelectCodex",
+        "title": "Select Codex"
+      },
+      {
+        "command": "co-pylot.AbortFunction",
+        "title": "Abort co-pylot Functions"
+      },
+      {
+        "command": "co-pylot.gpt_all",
+        "title": "Offline Mode. llama.GPT4ALL model required"
+      },
+      {
+        "command": "co-pylot.SetSysprompt",
+        "title": "Set new System prompt"
+      },
+      {
+        "command": "co-pylot.clearInput",
+        "title": "Clear History"
+      },
+      {
+        "command": "co-pylot.EditorMode",
+        "title": "Change to/from Editor Mode"
+      },
+      {
+        "command": "co-pylot.SelectGpt",
+        "title": "Ask GPT 3.5"
+      }
+
+    ],
+    "keybindings": [
+      {
+        "command": "co-pylot.SelectGpt",
+        "key": "ctrl+alt+g"
+      },
+      {
+        "command": "co-pylot.retrieveInput",
+        "key": "ctrl+alt+v"
+      },
+      {
+        "command": "co-pylot.clearInput",
+        "key": "ctrl+alt+d"
+      },
+      {
+        "command": "co-pylot.SelectCodex",
+        "key": "ctrl+alt+c"
+      },
+      {
+        "command": "co-pylot.AbortFunction",
+        "key": "ctrl+alt+a"
+      },
+      {
+        "command": "co-pylot.gpt_all",
+        "key": "ctrl+alt+o"
+      },
+      {
+        "command": "co-pylot.SetSysprompt",
+        "key": "ctrl+alt+s"
+      },
+      {
+        "command": "co-pylot.EditorMode",
+        "key": "ctrl+alt+m"
+      }
+
+    ]
+  },
+
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@vscode/test-electron": "^2.2.3",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "python-shell": "^5.0.0"
+  }
+}
