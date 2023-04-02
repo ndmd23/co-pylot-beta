@@ -39,11 +39,8 @@ To get this extension running, follow these steps:
 6. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder in your node.js terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
 7. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
 8. Check functionality:
-General
    - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
    - OR
    - Press `ctrl+shift+p`, search for `HelloWorld`, and the Information Panel should show instantly.
-   ChatGPT
     - Select text and press `ctrl+alt+g`. The response should be instant.
-    GPT4All
     - Select text and press `ctrl+alt+o`. The response appears within approximately 30 seconds.
