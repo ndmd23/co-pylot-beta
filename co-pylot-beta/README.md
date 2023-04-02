@@ -23,7 +23,7 @@ co-pylot is a Visual Studio Code extension that allows you to integrate OpenAI m
 
 ### GPT4ALL
 
-- `ctrl+alt+o`: Offline selected text to GPT4All
+- `ctrl+alt+o`: Selected text to GPT4All
 
 ## Installation
 
