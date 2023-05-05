@@ -2,7 +2,8 @@
 
 co-pylot is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
 
-Sidenote: Since GPT-3.5 and GPT-4 have a similar API, GPT-4 should work as well. Change ask_gpt.ask_turbo() the line `model="gpt-3.5-turbo"` to the model you want to call on.
+Sidenote: Since GPT-3.5 and GPT-4 have a similar API, GPT-4 should work as well. Change ask_gpt.ask_turbo() the line `model="gpt-3.5-turbo"` to the model you want to call on. 
+For older models the API is different. Use ask_codex. instead.
 
 ## Modes
 

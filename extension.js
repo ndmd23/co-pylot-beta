@@ -3,6 +3,10 @@ const vscode = require('vscode');
 const {PythonShell}=require('python-shell');
 const path = require('path');
 const scriptDirectory = path.dirname(__filename);
+//const markdownit = require('markdown-it');
+const showdown = require('showdown');
+const {htmlToText} = require('html-to-text');
+const he = require('he');	
 
 
 
@@ -22,126 +26,183 @@ var editor_string="";
 var variation="add_code";
 const myEmitter = new vscode.EventEmitter();
 var panel=null;
+var text_string = null;
+var mess_stringified ="";
 var text_string=null;
-var counter=-1;
+var html_string = "";
+var input_counter =0;
+//var counter=-1;
 
 
 //Functions
+function mark_html(markdown){
+	const converter = new showdown.Converter();
+	const html = converter.makeHtml(markdown);
+	return html;
+}
+
 function editor_html(editor_string){
-	let mess_stringified=JSON.stringify(editor_string)
-	mess_stringified=mess_stringified.replace(/\\n/g, "<br>")
-	.replace(/\\t/g, "&emsp;")
-	.replace(/\\r/g, "")
-	.replace(/\\\\/g, "\\")
-	.replace(/\\"/g, "&quot;")
-	.replace(/\\b/g, "&#08;")
-	.replace(/\\f/g, "&#12;")
-	.replace(/\\v/g, '&#11;')
-	.replace(/\\0/g, '')
-	.replace(/\\x([0-9A-Fa-f]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16)))
-	.replace(/\\u([0-9A-Fa-f]{4})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16)))
-	.replace(/\\'/g, "&#039;");
-	panel.webview.html = `
-	<!DOCTYPE html>
-	<html>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, hight= device-hight, initial-scale=1.0"
-	<head>	</head>
-	<style>
-	#searchInput{
-		display: flex;
-	   	position: fixed;
-	   	bottom: 0;
-	   	left: 0;
-	   	width: 100%;
-	   	padding: 10px;
-	   	background-color: #000;
-	   	color: #c2c2c2;
-	}
-	.code-container {
-		position: relative;
-	  }
-	  
-	.code-editor {
-		border: 2px solid #000;
-		border-radius: 4px;
-		padding: 10px;
-		font-family: monospace;
-	}
-	  
-	.copy-button {
-		position: absolute;
-		top: 5px;
-		right: 5px;
-		padding: 5px;
-		background-color: #ccc;
-		border-radius: 4px;
-		cursor: pointer;
-	}
-	body {
-	padding-bottom: 50px;
-	}
-	#myDiv{
-		    height: 100%;
-    overflow-y: scroll;
-	}
-   </style>
-	<script>
-	   function addMessage() {
-		   const myDiv = document.getElementById('myDiv');
-		   const html = ${mess_stringified};
-		   const newElement = document.createElement('div');
-		   newElement.innerHTML = html;
-		   myDiv.appendChild(newElement);
-	   };
+	//console.log(editor_string)
+	editor_string=mark_html(editor_string)
+	editor_string = he.decode(editor_string);
 
-	</script>
-	<body onload="addMessage()">
-		<div id="myDiv" onload="addMessage()"></div>
-		<div class="search-bar">
-			<input id="searchInput" type="text" placeholder="Search...">
-		</div>
+	editor_string=editor_string.replace(/\n/g, "<br>")
+		.replace(/\"/g, '\\"')
+		.replace(/<br><\/code>/g, "</code><br><br><button class='codeButton'>Copy</button>");
+	
 
-	</body>
-	<script>
-		const vscode = acquireVsCodeApi();
-		const searchInput = document.getElementById('searchInput');
-		searchInput.addEventListener('keypress', (event) => {
-			if (event.key === 'Enter') { 
-				const searchTerm = searchInput.value;
-				vscode.postMessage({ type: 'updateHtml', value: searchTerm });
-				searchInput.value='';
-			}
-		});
-		const copyButton = document.getElementById('.copy-button');
 
-		copyButton.addEventListener('click',()=>{
-			var codeEditor = document.querySelector('.code-editor');
-			var range = document.createRange();
-			range.selectNode(codeEditor);
-			window.getSelection().removeAllRanges();
-			window.getSelection().addRange(range);
-			document.execCommand('copy');
-			window.getSelection().removeAllRanges();
-
-		})
-		function copyCode() {
-			var codeEditor = document.querySelector('.code-editor');
-			var range = document.createRange();
-			range.selectNode(codeEditor);
-			window.getSelection().removeAllRanges();
-			window.getSelection().addRange(range);
-			document.execCommand('copy');
-			window.getSelection().removeAllRanges();
-		// Scroll message list to bottom
-		function scrollDown() {
-			var chatbox = document.querySelector("myDiv")
-			chatbox.scrollTo(0, chatbox.scrollHeight);
-			}
+		html_string = `
+		<!DOCTYPE html>
+		<html>
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, hight= device-hight, initial-scale=1.0">
+		<style>
+		.userInput {
+			float: left;
+			  display: inline-block;
+			padding: 4px;
+			border: 1px solid #000;
+			border-radius: 2px;
+			background-color: #000;
+			color: #c2c2c2;
+			font-size: 12px;
+			font-weight: normal;
+			font-style: normal;
+			text-decoration: none;
+		}
+		#searchInput{
+			   position: fixed;
+			   bottom: 0;
+			   left: 0;
+			   width: 100%;
+			   padding: 10px;
+			   background-color: #000;
+			   color: #c2c2c2;
+			border: 1px solid #000;
+			border-radius: 2px;
+		}
+		.normal-text {
+			font-size: 12px;
+			font-weight: normal;
+			font-style: normal;
+			text-decoration: none;
+			/* any other styles you want to reset */
+		}
+		h3 {
+			font-size: 12px; /* adjust font size as needed */
+			font-weight: bold; /* make text bold */
+			font-style: normal;
 		  }
-	</script>
-	</html>
-	`;
+		body {
+		padding-bottom: 50px;
+		padding-top: 10px;
+		}
+		#mainDiv {
+				padding-bottom: 50px;
+				padding-top: 10px;
+				height: 100%;
+				overflow-y: scroll;
+		}
+		#stop {
+			position: fixed;
+			bottom: 16%;
+			left: 50%;
+			background-color: #000;
+			color: #c2c2c2;
+			border: 1px solid #000;
+			border-radius: 2px;
+		}
+		.codeButton {
+			background-color: #000;
+			color: #c2c2c2;
+		}
+	   </style>
+	
+		</head>
+		<body onload="addMessage(); scrollDown()">
+			<div id="mainDiv" class="normal-text"></div>
+			<button id='stop'>Stop</button>
+			<input id="searchInput" type="text" placeholder="Search...">
+		</body>
+	
+		<script>
+			function addMessage() {
+				 const vscode = acquireVsCodeApi();
+				 const myDiv = document.getElementById('mainDiv');
+				 const html = "${editor_string}";
+				 myDiv.innerHTML = html;
+	
+				//Search Event
+				 
+				const searchInput = document.getElementById('searchInput');
+				searchInput.addEventListener('keypress', (event) => {
+					if (event.key === 'Enter') { 
+					 const searchTerm = searchInput.value;
+					 vscode.postMessage({ type: 'updateHtml', value: searchTerm });
+					 searchInput.value='';
+					}
+				});
+	
+				//Stop Event
+	
+				const stopButton = document.getElementById('stop')
+				if (stopButton){
+					stopButton.addEventListener('click', ()=>{
+						vscode.postMessage({type: 'stop'})
+					});
+				};
+	
+				//Edited Input
+	
+				const userInputs = document.querySelectorAll(".userInput");
+				if(userInputs){
+				userInputs.forEach((btn) => {
+				 btn.addEventListener("keypress", (event) => {
+					if (event.key === "Enter"){
+						
+					 vscode.postMessage({
+						 type: 'changedInput',
+						 new: btn.value,
+						 old: btn.outerHTML,
+						 length: btn.value.length
+						 });
+						};
+					 });
+				 });
+				 
+				};
+	
+	
+	
+				//Copy Event
+	
+				const Buttons = document.querySelectorAll(".codeButton");
+				if(Buttons){
+				Buttons.forEach((btn) => {
+				 btn.addEventListener("click", (event) => {
+					 const codeEl = event.target.previousElementSibling;
+					 vscode.postMessage({
+						 type: 'copy',
+						 value: codeEl.innerHTML
+						 });
+					 });
+				 });
+				};
+	
+			};
+	
+			function scrollDown() {
+				document.body.scrollTo(0, document.body.scrollHeight);
+				};
+	
+		</script>
+		</html>
+		`;
+
+panel.webview.html = html_string;
+return html_string;
 };
 
 //Main function:
@@ -163,8 +224,9 @@ function pyshell_editor(filepath, model, variation){
 	//Search in editor changes variation as holder of text_string
 	if (["add_code"].includes(variation)===false){
 		//Editor Mode: Add text to string.
-		editor_string=editor_string+"\\n<div><h3>"+text_string+"</h3></div>\\n";
-		editor_html(editor_string)
+		editor_string=editor_string+"<div><input id='"+input_counter+"' type='text' class='userInput' value='"+text_string+"'></input><br></div><div>";
+		input_counter = input_counter +1;
+		html_string = editor_html(editor_string);
 	};	
 
 	//Stop if empty 
@@ -179,7 +241,7 @@ function pyshell_editor(filepath, model, variation){
 	saveInput(text_string);
 	//GPT accepts multiple Inputs
 	if (model=="GPT"){
-		text_string=inputs.join("¬")
+		text_string=inputs.join("--")
 			};
 	
 	function add_code(activeEditor, message){
@@ -235,19 +297,11 @@ function pyshell_editor(filepath, model, variation){
 					text_position = new vscode.Position(text_position.line + 1, 0)
 			};
 		}else{
-			if (message.includes("``")){
-				counter=counter*(-1);
-				if (counter==1){
-					message=  '<div class="code-container"><pre class="code-editor">';
-				}else{
-				message= '</pre><button class="copy-button" onclick="copyCode()">Copy</button></div>';
-				}
-			}
 			if(model=="GPT4All"){
 				message=ansi_html(message)
 			}
 			editor_string= editor_string + message;
-			editor_html(editor_string);
+			html_string = editor_html(editor_string);
 		}
 	});
 	//End Trigger to Abort pyshell
@@ -255,6 +309,8 @@ function pyshell_editor(filepath, model, variation){
 		terminate=true;
 		pyshell_c.send('terminate');
 		pyshell_c.end(function (err) {
+			html_string = html_string.replace(/<button id=\'stop\'>Stop<\/button>/g,"");
+			panel.webview.html = html_string;
 			if (err) {
 			  console.error(err);
 			} else {
@@ -265,6 +321,8 @@ function pyshell_editor(filepath, model, variation){
 	  });
 	//End
 	pyshell_c.end((err)=> {
+		html_string = html_string.replace(/<button id=\'stop\'>Stop<\/button>/g,"");
+		panel.webview.html = html_string;
 		if (err){
 			const errorMessage = err.toString();
 			activeEditor.edit((selectedText) => {
@@ -325,7 +383,7 @@ function ansi_html(text) {
 	return cleanedText;
   }
 
-//Sets Correct Systemmprompt
+//Sets Correct System prompt
 function sys_send(text_string){
 	if (text_string.length===0){ 
 		//Empty entry -> default_prompt
@@ -448,29 +506,53 @@ function activate(context) {
 					localResourceRoots: [vscode.Uri.file(context.extensionPath)],
 				}
 			 );
+			 const filepath = path.join(scriptDirectory, 'ask_gpt.py');
+
 			//Listener for User Input
-			panel.webview.onDidReceiveMessage(message => {
-				if (message.type === 'updateHtml') {
-					vscode.window.showInformationMessage(message.value);
-					const filepath = path.join(scriptDirectory, 'ask_gpt.py');
-					pyshell_editor(filepath, "GPT", message.value)
-				}
-				if(message.type==='copyCode'){
-					//let range=message.range
-					//window.getSelection().removeAllRanges();
-					//window.getSelection().addRange(range);
-					//document.execCommand('copy');
-					//window.getSelection().removeAllRanges();
-					
-				}
-			});
+			panel.webview.onDidReceiveMessage(async message => {
+				switch(message.type){
+					case 'updateHtml':
+						vscode.window.showInformationMessage(message.value);
+						pyshell_editor(filepath, "GPT", message.value)
+						return;
+					case 'copy':
+						const text=htmlToText(message.value)
+						console.log(text)
+						await vscode.env.clipboard.writeText(text);
+						vscode.window.showInformationMessage('Text copied to clipboard.');
+						return;
+					case 'stop':
+						myEmitter.fire();
+						return;
+					case 'changedInput':
+						//Trim HTML
+						let str = message.old.replaceAll('"',"'");
+						//console.log(str);
+						let parts = editor_string.split(str);
+						editor_string = parts[0];
+
+						//Trim Inputs
+						const regex = /input id=['"](\d+?)['"]/;				
+						const match = str.match(regex);
+						//console.log(match);
+						//let matchIndex = inputs.indexOf(match);
+						inputs = inputs.slice(0, match[1]*2+1);
+						input_counter = match[1];
+						//console.log(inputs);
+
+						//Iterate
+						pyshell_editor(filepath, "GPT", message.new);
+					//case 'input':
+					//	console.log(message.value);
+
+					}});
 			panel.onDidDispose(() => {
 				variation=="add_code";
 				vscode.window.showInformationMessage("Change Mode to: "+variation);
 
 			});
 			//Default Webview
-			editor_html("");
+			html_string = editor_html("");
 		//Switch back from Webview
 		}else if(variation=="editor"){
 			panel.dispose();

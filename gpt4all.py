@@ -11,7 +11,7 @@ op_sys = platform.system()
 
 
 ## Change this to the path of your executable file
-exe_dir = os.path.join(parent_dir+"/gpt4all/chat")
+exe_dir = os.path.join(parent_dir+"/gpt4all/")
 if op_sys == "Windows":
     exe_path = os.path.join(exe_dir+"/gpt4all-lora-quantized-win64.exe")
 if op_sys == "Linux":

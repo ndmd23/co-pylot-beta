@@ -57,7 +57,7 @@ async def ask_turbo():
 async def handle_std():
     prompt=[]
     input= sys.stdin.readlines()
-    input_list=str(input).split('¬')
+    input_list=str(input).split('--')
     for i, line in enumerate(input_list):
         if i==0:
             role="system"
