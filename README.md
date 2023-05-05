@@ -29,11 +29,22 @@ For older models the API is different. Use ask_codex. instead.
 - `ctrl+alt+o`: Selected text to GPT4All
 
 ## Installation
+**Easy Version**
+Gives you only access to OpenAI.
 
+1. Download co-pylot-beta-0.0.1.vsix
+2. Install the package clients for vscode extension:
+   - `npm install -g yo generator-code`
+3. Run `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
+4. Go to your Extensions directory, like C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1
+   - open .env with Texteditor, insert your OpenAI key. Create one [here](https://platform.openai.com/account/api-keys).
+
+
+**Full Version**
 To get this extension running, follow these steps:
 
 1. Download the repository into the co-pylot folder.
-2. Change the API-Key in the co-pylot/.env document. `OPEN_API_KEY = your_open_ai_key`. If you don't have one, create one [here](https://platform.openai.com/account/api-keys).
+2. Change the API-Key in the co-pylot/.env document. `OPEN_API_KEY = your_open_ai_key`. Create one [here](https://platform.openai.com/account/api-keys).
 3. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy the chat folder `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in the empty `~/GPT4All` folder.
 
 Check functionality 
@@ -45,9 +56,10 @@ Check functionality
    - `npm install -g yo generator-code`
 5. ` install -g @vscode/vsce`
 6. Open the co-pylot folder in vscode and run `vsce package`.
-7. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder in your node.js terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
-7. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
-8. Check functionality:
+7. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
+**Run it**
+8. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
+9. Check functionality:
    - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
    - OR
    - Press `ctrl+shift+p`, search for `HelloWorld`, and the Information Panel should show instantly.
