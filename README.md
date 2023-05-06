@@ -32,7 +32,7 @@ Sidenote: Since GPT-3.5 and GPT-4 have a similar API, GPT-4 should work as well.
 - `ctrl+alt+o`: Selected text to GPT4All
 
 ## Installation
-**Easy Version**
+**Basic**
 Gives you only access to OpenAI.
 
 1. Download co-pylot-beta-0.0.1.vsix
@@ -44,29 +44,17 @@ Gives you only access to OpenAI.
 
 
 
-**Full Version**
-To get this extension running, follow these steps:
+**Add GPT4All**
 
-1. Download the repository into the co-pylot folder.
-2. Change the API-Key in the co-pylot/.env document. `OPEN_API_KEY = your_open_ai_key`. Create one [here](https://platform.openai.com/account/api-keys).
-3. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy the chat folder `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in the empty `~/GPT4All` folder.
+5. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in a new empty `~/gpt4all` folder in `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1`.
 
-Check functionality 
-   - open project folder in vscode
-   - press `F5` to run extension in dev mode
-
-
-4. Install the package clients for vscode extension:
-   - `npm install -g yo generator-code`
-5. ` install -g @vscode/vsce`
-6. Open the co-pylot folder in vscode and run `vsce package`.
-7. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
 
 **Run it**
-8. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
-9. Check functionality:
+6. Check if it has been installed by going to  VSCode Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
+
+7. Check functionality:
    - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
-   - OR
+   OR
    - Press `ctrl+shift+p`, search for `HelloWorld`, and the Information Panel should show instantly.
     - Select text and press `ctrl+alt+g`. The response should be instant.
-    - Select text and press `ctrl+alt+o`. The response appears within a few seconds.
+    - Select text and press `ctrl+alt+o`. The response appears within 30 seconds. If impatient, check taskmanager if `gpt-lora-quantized-win64.exe`is running
