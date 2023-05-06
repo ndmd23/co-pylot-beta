@@ -39,8 +39,9 @@ Gives you only access to OpenAI.
 2. Install the package clients for vscode extension:
    - `npm install -g yo generator-code`
 3. Run `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
-4. Go to your Extensions directory, like C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1
-   - open .env with Texteditor, insert your OpenAI key. Create one [here](https://platform.openai.com/account/api-keys).
+4. Go to your the VSCODE Extensions Folder, which could look like `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1`
+   - open .env with a text editor, insert your OpenAI key. Create one [here](https://platform.openai.com/account/api-keys).
+
 
 
 **Full Version**
@@ -60,6 +61,7 @@ Check functionality
 5. ` install -g @vscode/vsce`
 6. Open the co-pylot folder in vscode and run `vsce package`.
 7. Install the extension in VSCode by running the `.vsix` file from the co-pylot folder terminal: `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
+
 **Run it**
 8. Check if it has been installed by going to Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
 9. Check functionality:
