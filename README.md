@@ -4,7 +4,7 @@
 https://user-images.githubusercontent.com/121035654/236586281-cbf1ca0a-e0bc-4572-b69a-e51bd6bac306.mp4
 
 
-co-pylot is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
+co-pylot-beta is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
 
 Sidenote: Since GPT-3.5 and GPT-4 have a similar API, GPT-4 should work as well. Change ask_gpt.ask_turbo() the line `model="gpt-3.5-turbo"` to the model you want to call on. 
 
@@ -38,19 +38,19 @@ Gives you only access to OpenAI.
 1. Download co-pylot-beta-0.0.1.vsix
 2. Install the package clients for vscode extension:
    - `npm install -g yo generator-code`
-3. Run `code --install-extension C:/Users/path/to/co-pylot/co-pylot-0.0.1.vsix`.
-4. Go to your the VSCODE Extensions Folder, which could look like `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1`
+3. Run `code --install-extension C:/Users/path/to/co-pylot-beta/co-pylot-beta-0.0.1.vsix`.
+4. Go to your the VSCODE Extensions Folder, which could look like `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-beta-0.0.1`
    - open .env with a text editor, insert your OpenAI key. Create one [here](https://platform.openai.com/account/api-keys).
 
 
 
 **Add GPT4All**
 
-5. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in a new empty `~/gpt4all` folder in `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-0.0.1`.
+5. For offline use, download the model (4 GB) from [Github Nomic gpt4all](https://github.com/nomic-ai/gpt4all). Copy `gpt-lora-quantized.bin` and `gpt-lora-quantized-win64.exe` in a new empty `~/gpt4all` folder in `C:/Users/.vscode/extensions/undefined_publisher.co-pylot-beta-0.0.1`.
 
 
 **Run it**
-6. Check if it has been installed by going to  VSCode Extensions (`ctrl+shift+x`) and typing `@installed co-pylot` in the search bar. You should find co-pylot by undefined_publisher.
+6. Check if it has been installed by going to  VSCode Extensions (`ctrl+shift+x`) and typing `@installed co-pylot-beta` in the search bar. You should find co-pylot by undefined_publisher.
 
 7. Check functionality:
    - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
