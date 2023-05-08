@@ -1,7 +1,7 @@
 # VSCODE Extension integrating OpenAI and GPT4All
 
 
-https://user-images.githubusercontent.com/121035654/236586281-cbf1ca0a-e0bc-4572-b69a-e51bd6bac306.mp4
+https://user-images.githubusercontent.com/121035654/236586281-cbf1ca0a-e0bc-4572-b69a-e51bd6bac306.mp4Cancel changes
 
 
 co-pylot-beta is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
@@ -50,11 +50,12 @@ Gives you only access to OpenAI.
 
 
 **Run it**
+
 6. Check if it has been installed by going to  VSCode Extensions (`ctrl+shift+x`) and typing `@installed co-pylot-beta` in the search bar. You should find co-pylot by undefined_publisher.
 
 7. Check functionality:
    - Press `ctrl+alt+m`: Split screen named AI Webview Editor should appear.
    OR
    - Press `ctrl+shift+p`, search for `HelloWorld`, and the Information Panel should show instantly.
-    - Select text and press `ctrl+alt+g`. The response should be instant.
-    - Select text and press `ctrl+alt+o`. The response appears within 30 seconds. If impatient, check taskmanager if `gpt-lora-quantized-win64.exe`is running
+    - OpenAI: Select text and press `ctrl+alt+g`. The response should be instant.
+    - GPT4ALL: Select text and press `ctrl+alt+o`. The response appears within 30 seconds. If impatient, check taskmanager if `gpt-lora-quantized-win64.exe`is running
