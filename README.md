@@ -1,7 +1,8 @@
 # VSCODE Extension integrating OpenAI and GPT4All
 
 
-https://user-images.githubusercontent.com/121035654/236586281-cbf1ca0a-e0bc-4572-b69a-e51bd6bac306.mp4Cancel changes
+https://user-images.githubusercontent.com/121035654/236586281-cbf1ca0a-e0bc-4572-b69a-e51bd6bac306.mp4
+
 
 
 co-pylot-beta is a Visual Studio Code extension that allows you to integrate OpenAI models and APIs into your code. It creates a key-shortcut in VSCODE to connect to the stream of OpenAI's GPT-3.5-Turbo API and GPT4All for offline use.
